@@ -121,3 +121,28 @@ bigdata-project/
 └── scripts/                          # Script PySpark pipeline
     └── batch_pipeline_enterprise.py  # Script utama Week 2
 ```
+
+## Setup Environment dan Cara Menjalankan Pipeline
+
+Bagian ini menjelaskan setup environment praktikum menggunakan **Ubuntu environment melalui WSL**, pengembangan dengan **VS Code Remote WSL**, serta dependency yang dibutuhkan untuk menjalankan **PySpark batch pipeline**. Ikuti langkah di bawah secara berurutan agar environment konsisten dan pipeline bisa dijalankan tanpa error. :contentReference[oaicite:0]{index=0}
+
+### 1) Install dan Konfigurasi WSL Ubuntu Environment
+
+1. Buka **PowerShell** sebagai Administrator, lalu install WSL:
+```bash
+wsl --install
+```
+2. Jika Ubuntu belum terpasang, install distro Ubuntu:
+```bash
+wsl --install -d Ubuntu
+```
+3. Restart Windows jika diminta. Setelah itu, jalankan Ubuntu pertama kali:
+    - Buka Start Menu → cari Ubuntu
+    - Buat username dan password
+    - Jika berhasil, prompt akan terlihat seperti: `username@DESKTOP:~$`
+### 2) Install Dependency di Ubuntu (WSL)
+Di terminal Ubuntu jalankan:
+1. Update package:
+```bash
+sudo apt update && sudo apt upgrade -y
+```
