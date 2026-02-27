@@ -43,58 +43,16 @@ Setelah praktikum ini, kamu diharapkan mampu:
 Pipeline yang dibangun mengikuti alur batch processing berlapis. Alur ini memisahkan data berdasarkan tingkat “kematangan” data sehingga setiap layer punya fungsi yang jelas.
 
 ### Diagram Pipeline
-```text
-                 ┌──────────────────────────┐
-                 │   CSV Source Dataset      │
-                 │   ecommerce_raw.csv       │
-                 └─────────────┬────────────┘
-                               │
-                               ▼
-                 ┌──────────────────────────┐
-                 │        RAW LAYER          │
-                 │   data/raw (CSV)          │
-                 │   Data mentah disimpan    │
-                 └─────────────┬────────────┘
-                               │
-                               ▼
-                 ┌──────────────────────────┐
-                 │  CLEANING & VALIDATION    │
-                 │  - drop duplicates        │
-                 │  - handle nulls           │
-                 │  - filter nilai invalid   │
-                 │  - parse tanggal          │
-                 └─────────────┬────────────┘
-                               │
-                               ▼
-                 ┌──────────────────────────┐
-                 │     TRANSFORMATION        │
-                 │  - feature engineering    │
-                 │  - contoh: total_amount   │
-                 └─────────────┬────────────┘
-                               │
-                               ▼
-                 ┌──────────────────────────┐
-                 │       CLEAN LAYER         │
-                 │   data/clean (Parquet)    │
-                 │   Data bersih & konsisten │
-                 └─────────────┬────────────┘
-                               │
-                               ▼
-                 ┌──────────────────────────┐
-                 │ CURATED LAYER (AGGREGATE) │
-                 │ data/curated (Parquet)    │
-                 │ - revenue per category    │
-                 │ - top products            │
-                 │ - avg transaction/customer│
-                 └─────────────┬────────────┘
-                               │
-                               ▼
-                 ┌──────────────────────────┐
-                 │   PARTITIONED DATA LAKE   │
-                 │  clean/partitioned_by_*   │
-                 │  Optimasi query & storage │
-                 └──────────────────────────┘
+```mermaid
+flowchart LR
+  A[CSV Source<br/>ecommerce_raw.csv] --> B[RAW Layer<br/>data/raw CSV]
+  B --> C[Cleaning & Validation<br/>dedup, null, validasi, parse tanggal]
+  C --> D[Transformation<br/>total_amount = price * quantity]
+  D --> E[CLEAN Layer<br/>data/clean Parquet]
+  E --> F[CURATED Layer<br/>data/curated Parquet<br/>revenue, top products, avg trx]
+  F --> G[Partitioned Data Lake<br/>data/clean/partitioned_by_*]
 ```
+
 ## Konsep yang Dipakai
 1. Batch Processing: data diproses dalam satu run (tidak real time).
 2. Distributed Computing: Spark membagi pekerjaan ke beberapa core/worker (di praktikum ini local mode).
@@ -124,11 +82,11 @@ bigdata-project/
 
 ## Bukti Screenshots
 
-Berikut dokumentasi proses praktikum Big Data:
+Berikut dokumentasi proses praktikum 2 batch data ingestion & processing with spark:
 
 <table>
 <tr>
-<td align="center"><b>Spark berhasil berjalan</b></td>
+<td align="center"><b>Menjalankan Pipeline: python scripts/batch_pipeline_enterprise.py</b></td>
 </tr>
 <tr>
 <td><img src="screenshots/bukti_praktikum.png"/></td>
@@ -240,8 +198,8 @@ source venv/bin/activate
 
 ## Output yang Diharapkan
 Setelah pipeline sukses, minimal folder berikut akan terbentuk
-    - `data/clean/parquet/`
-    - `data/clean/partitioned_by_category/`
-    - `data/curated/category_revenue/`
-    - `data/curated/top_products/`
-    - `data/curated/avg_transaction/`
+1. `data/clean/parquet/`
+2. `data/clean/partitioned_by_category/`
+3. `data/curated/category_revenue/`
+4. `data/curated/top_products/`
+5. `data/curated/avg_transaction/`
