@@ -95,6 +95,19 @@ Berikut dokumentasi proses praktikum 2 batch data ingestion & processing with sp
 
 ---
 
+## Mengatur .gitignore untuk Virtual Environment dan Cache Python
+
+Jalankan perintah berikut dari root project untuk menambahkan aturan `.gitignore`, lalu cek hasilnya:
+
+```bash
+echo ".venv/" >> .gitignore
+echo "__pycache__/" >> .gitignore
+echo "*.pyc" >> .gitignore
+cat .gitignore
+```
+
+---
+
 ## Setup Environment dan Cara Menjalankan Pipeline
 
 Bagian ini menjelaskan setup environment praktikum menggunakan **Ubuntu environment melalui WSL**, pengembangan dengan **VS Code Remote WSL**, serta dependency yang dibutuhkan untuk menjalankan **PySpark batch pipeline**. Ikuti langkah di bawah secara berurutan agar environment konsisten dan pipeline bisa dijalankan tanpa error. :contentReference[oaicite:0]{index=0}
