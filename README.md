@@ -146,3 +146,30 @@ Di terminal Ubuntu jalankan:
 ```bash
 sudo apt update && sudo apt upgrade -y
 ```
+2. Install Java 17 (wajib untuk Spark karena Spark berjalan di JVM):
+```bash
+sudo apt install openjdk-17-jdk -y
+java -version
+```
+3. Install Python dan tools untuk venv:
+```bash
+sudo apt install python3-full python3-venv python3-pip -y
+```
+
+### 3) Buat Struktur Project
+Buat folder project dan struktur data lake:
+```bash
+cd ~
+mkdir -p bigdata-project/{data/raw,data/clean,data/curated,logs,scripts}
+cd bigdata-project
+```
+### 4) Setup VS Code Remote WSL
+1. Install VS Code di Windows
+2. Install extension:
+    - WSL (Microsoft)
+    - Python (Microsoft)
+3. Buka VS Code dalam mode WSL:
+    - Tekan `Ctrl + Shift + P`
+    - Pilih WSL: New Window
+    - Open Folder ke: `/home/<username>/bigdata-project`
+    - Jika pojok kiri bawah tertulis `WSL: Ubuntu`, artinya VS Code sudah terhubung ke WSL.
