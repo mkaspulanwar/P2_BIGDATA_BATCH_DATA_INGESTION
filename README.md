@@ -122,6 +122,21 @@ bigdata-project/
     └── batch_pipeline_enterprise.py  # Script utama Week 2
 ```
 
+## Bukti Screenshots
+
+Berikut dokumentasi proses praktikum Big Data:
+
+<table>
+<tr>
+<td align="center"><b>Spark berhasil berjalan</b></td>
+</tr>
+<tr>
+<td><img src="screenshots/bukti_praktikum.png"/></td>
+</tr>
+</table>
+
+---
+
 ## Setup Environment dan Cara Menjalankan Pipeline
 
 Bagian ini menjelaskan setup environment praktikum menggunakan **Ubuntu environment melalui WSL**, pengembangan dengan **VS Code Remote WSL**, serta dependency yang dibutuhkan untuk menjalankan **PySpark batch pipeline**. Ikuti langkah di bawah secara berurutan agar environment konsisten dan pipeline bisa dijalankan tanpa error. :contentReference[oaicite:0]{index=0}
@@ -173,3 +188,60 @@ cd bigdata-project
     - Pilih WSL: New Window
     - Open Folder ke: `/home/<username>/bigdata-project`
     - Jika pojok kiri bawah tertulis `WSL: Ubuntu`, artinya VS Code sudah terhubung ke WSL.
+
+### 5) Buat dan Gunakan Virtual Environment (venv)
+Dari root folder project `~/bigdata-project`:
+1. Buat venv:
+```bash
+python3 -m venv venv
+```
+2. Aktifkan venv:
+```bash
+source venv/bin/activate
+```
+3. Upgrade pip dan install PySpark:
+```bash
+pip install --upgrade pip
+pip install pyspark
+```
+4. (Opsional) Simpan dependency untuk reproducibility:
+```bash
+pip freeze > requirements.txt
+```
+5. Pastikan VS Code memakai interpreter venv:
+    - `Ctrl + Shift + P`
+    - `Python: Select Interpreter`
+    - Pilih `venv/bin/python`
+
+### 6) Letakkan Dataset
+1. Masuk ke folder raw:
+```bash
+cd ~/bigdata-project/data/raw
+pwd
+```
+2. Buka folder tersebut di Windows Explorer:
+```bash
+explorer.exe .
+```
+3. Copy file dataset ke folder ini dengan nama: `ecommerce_raw.csv`
+    - Sehingga path dataset menjadi: `data/raw/ecommerce_raw.csv`
+
+## Cara Menjalankan Pipeline
+1. Masuk ke root project:
+```bash
+cd ~/bigdata-project
+```
+2. Aktifkan venv:
+```bash
+source venv/bin/activate
+```
+3. Pastikan script utama ada di: `scripts/batch_pipeline_enterprise.py`
+4. Jalankan pipeline: `python scripts/batch_pipeline_enterprise.py`
+
+## Output yang Diharapkan
+Setelah pipeline sukses, minimal folder berikut akan terbentuk
+    - `data/clean/parquet/`
+    - `data/clean/partitioned_by_category/`
+    - `data/curated/category_revenue/`
+    - `data/curated/top_products/`
+    - `data/curated/avg_transaction/`
