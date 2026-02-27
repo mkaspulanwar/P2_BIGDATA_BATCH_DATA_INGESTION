@@ -106,6 +106,8 @@ Pipeline yang dibangun mengikuti alur batch processing berlapis. Alur ini memisa
 Struktur folder mengikuti standar data lake berlapis agar alur kerja jelas dan mudah dikembangkan.
 ```markdown
 bigdata-project/
+├── .venv
+├── screenshots
 ├── data/
 │   ├── raw/                          # Data mentah (CSV) sebagai source of truth
 │   ├── clean/                        # Data bersih (Parquet) termasuk output partisi
